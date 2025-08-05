@@ -3,190 +3,164 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bac Bo - Análise com Grade Oficial</title>
+  <title>Bac Bo - Registro Simples</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #000;
-      color: #fff;
-      min-height: 100vh;
-    }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    header {
-      text-align: center;
-      padding: 20px;
-      border-bottom: 1px solid #333;
-      margin-bottom: 20px;
-    }
-    h1 {
-      color: #00ccff;
-      text-shadow: 0 0 10px rgba(0, 204, 255, 0.4);
-    }
-    .input-section {
-      background: #0f0f20;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-    }
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-      color: #00ccff;
-    }
-    input {
-      width: 100%;
-      max-width: 300px;
-      padding: 12px;
-      border: 1px solid #555;
-      border-radius: 6px;
-      background: #222;
-      color: white;
-      font-size: 1.1em;
-    }
-    button {
-      background: #00ccff;
-      color: #000;
-      border: none;
-      padding: 12px 20px;
-      font-size: 1.1em;
-      border-radius: 8px;
-      cursor: pointer;
-      margin: 5px;
-      font-weight: bold;
-    }
-    button.clear {
-      background: #ff6600;
-      color: white;
-    }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #000;
+    color: #fff;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  header {
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 20px;
+  }
+  h1 {
+    color: #00ccff;
+    text-shadow: 0 0 10px rgba(0, 204, 255, 0.4);
+  }
 
-    .results {
-      background: #0a0a1a;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    .bar-chart {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin: 20px 0;
-      height: 80px;
-      align-items: flex-end;
-    }
-    .bar {
-      width: 60px;
-      background: #333;
-      height: 0;
-      border-radius: 4px 4px 0 0;
-      transition: height 0.6s ease;
-    }
-    .bar.blue { background: #0066ff; }
-    .bar.red { background: #d40000; }
-    .bar.yellow { background: #e6b800; }
-    .bar-label {
-      text-align: center;
-      font-size: 0.9em;
-      margin-top: 5px;
-      white-space: nowrap;
-    }
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+  .btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    font-size: 1.3em;
+    font-weight: bold;
+    border: 3px solid #555;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s;
+  }
+  .btn:hover {
+    transform: scale(1.1);
+  }
+  .btn.blue { background: #0066ff; color: white; }
+  .btn.red { background: #d40000; color: white; }
+  .btn.yellow { background: #e6b800; color: #000; }
 
-    .stats-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px dashed #444;
-      font-size: 1.1em;
-    }
-    .blue-text { color: #0066ff; }
-    .red-text { color: #d40000; }
-    .yellow-text { color: #e6b800; }
+  .rounds {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+  .round {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9em;
+    font-weight: bold;
+    border: 2px solid #555;
+  }
+  .round.blue { background: #0066ff; color: white; }
+  .round.red { background: #d40000; color: white; }
+  .round.yellow { background: #e6b800; color: #000; }
+  .round.empty { background: #333; }
 
-    .prediction {
-      font-size: 1.3em;
-      margin: 15px 0;
-      line-height: 1.6;
-    }
-    .high { color: #00ffcc; }
-    .medium { color: #ffcc00; }
-    .low { color: #ff6666; }
+  .btn-clear {
+    background: #ff6600;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px auto;
+    display: block;
+  }
 
-    .disclaimer {
-      font-size: 0.8em;
-      color: #ff6666;
-      margin-top: 30px;
-      padding: 15px;
-      border-top: 1px dashed #555;
-      text-align: center;
-    }
+  .results {
+    background: #0a0a1a;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    text-align: center;
+  }
+  .bar-chart {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+    height: 80px;
+    align-items: flex-end;
+  }
+  .bar {
+    width: 50px;
+    background: #333;
+    height: 0;
+    border-radius: 4px 4px 0 0;
+    transition: height 0.6s ease;
+  }
+  .bar.blue { background: #0066ff; }
+  .bar.red { background: #d40000; }
+  .bar.yellow { background: #e6b800; }
+  .bar-label {
+    text-align: center;
+    font-size: 0.8em;
+    margin-top: 5px;
+  }
 
-    /* Grade de rodadas */
-    .round-grid {
-      display: grid;
-      grid-template-columns: repeat(10, 40px);
-      gap: 10px;
-      justify-content: center;
-      margin: 20px 0;
-    }
-    .round-cell {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.2em;
-      border: 2px solid #555;
-      background: #222;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .round-cell.blue { background: #0066ff; }
-    .round-cell.red { background: #d40000; }
-    .round-cell.yellow { background: #e6b800; color: #000; }
-    .round-cell.empty { background: #333; }
-  </style>
+  .prediction {
+    font-size: 1.3em;
+    margin: 15px 0;
+    line-height: 1.6;
+    color: #00ffcc;
+  }
+
+  .disclaimer {
+    font-size: 0.8em;
+    color: #ff6666;
+    margin-top: 30px;
+    padding: 15px;
+    border-top: 1px dashed #555;
+    text-align: center;
+  }
+</style>
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>📊 Bac Bo - Análise com Grade Oficial</h1>
-      <p>Registre as últimas 10 rodadas e veja a análise</p>
+      <h1>🎯 Bac Bo - Registro Simples</h1>
+      <p>Clique nas cores para registrar as últimas 10 rodadas</p>
     </header>
 
-    <div class="input-section">
-      <!-- Números diretos -->
-      <div class="form-group">
-        <label for="blue">🔵 Azul (Player)</label>
-        <input type="number" id="blue" placeholder="Ex: 8" min="0">
-      </div>
-      <div class="form-group">
-        <label for="red">🔴 Vermelho (Banker)</label>
-        <input type="number" id="red" placeholder="Ex: 10" min="0">
-      </div>
-      <div class="form-group">
-        <label for="yellow">🟡 Amarelo (Tie)</label>
-        <input type="number" id="yellow" placeholder="Ex: 2" min="0">
-      </div>
-
-      <!-- Últimas 10 rodadas -->
-      <div class="form-group">
-        <label>Últimas 10 Rodadas</label>
-        <div class="round-grid" id="recentRounds"></div>
-        <button class="clear" onclick="clearHistory()">🧹 Limpar Histórico</button>
-      </div>
-
-      <button onclick="analyze()">🔮 Analisar Padrões</button>
+    <!-- Botões de cores -->
+    <div class="controls">
+      <button class="btn blue" onclick="addRound('blue')">🔵</button>
+      <button class="btn red" onclick="addRound('red')">🔴</button>
+      <button class="btn yellow" onclick="addRound('yellow')">🟡</button>
     </div>
 
-    <div class="results" id="results" style="display: none;">
+    <!-- Grade de 10 rodadas -->
+    <div class="rounds" id="rounds">
+      <!-- Preenchido pelo JS -->
+    </div>
+
+    <button class="btn-clear" onclick="clearHistory()">🧹 Limpar Tudo</button>
+
+    <!-- Resultados da IA -->
+    <div class="results">
       <h3>📈 Análise da IA</h3>
 
       <div class="bar-chart">
@@ -195,152 +169,118 @@
         <div><div class="bar yellow" id="bar-yellow"></div><div class="bar-label">Tie</div></div>
       </div>
 
-      <div id="probabilities"></div>
-      <div class="prediction" id="prediction"></div>
+      <div class="prediction" id="prediction">
+        Registre algumas rodadas para ver a análise.
+      </div>
     </div>
 
     <div class="disclaimer">
-      ⚠️ <strong>Aviso:</strong> Este site usa análise estatística com base em padrões reais, mas <strong>não garante resultados</strong>.<br>
-      O Bac Bo é um jogo de azar com resultados aleatórios (RNG).<br>
-      Use como ferramenta de apoio, nunca como garantia de vitória.<br>
+      ⚠️ Este site não prevê resultados. Usa análise de padrões para sugerir entradas.<br>
+      O Bac Bo é um jogo de azar com resultados aleatórios.<br>
       Jogue com responsabilidade.
     </div>
   </div>
 
   <script>
-    let recentRounds = [];
-    const colors = ['blue', 'red', 'yellow'];
+    // Armazena as últimas 10 rodadas
+    let rounds = [];
 
-    // Criar grade de 10 rodadas
-    function createRoundGrid() {
-      const grid = document.getElementById('recentRounds');
-      grid.innerHTML = '';
+    // Cria a grade de 10 células
+    function createRounds() {
+      const container = document.getElementById('rounds');
+      container.innerHTML = '';
       for (let i = 0; i < 10; i++) {
         const cell = document.createElement('div');
-        cell.className = 'round-cell empty';
-        cell.dataset.index = i;
-        cell.onclick = () => addRound(cell.dataset.index);
-        if (i < recentRounds.length) {
-          const color = recentRounds[i];
-          cell.className = `round-cell ${color}`;
+        cell.className = 'round empty';
+        if (i < rounds.length) {
+          const color = rounds[i];
+          cell.className = `round ${color}`;
           cell.textContent = color === 'blue' ? 'P' : color === 'red' ? 'B' : 'T';
         }
-        grid.appendChild(cell);
+        container.appendChild(cell);
       }
+      analyze(); // Atualiza análise
     }
 
-    function addRound(index) {
-      if (index >= 0 && index < 10) {
-        const newColor = prompt("Selecione a cor:\n1. Azul\n2. Vermelho\n3. Tie");
-        switch (newColor) {
-          case '1':
-            recentRounds[index] = 'blue';
-            break;
-          case '2':
-            recentRounds[index] = 'red';
-            break;
-          case '3':
-            recentRounds[index] = 'yellow';
-            break;
-          default:
-            alert("Cor inválida. Tente novamente.");
-            return;
-        }
-        createRoundGrid();
-        analyze();
+    // Adiciona uma rodada
+    function addRound(color) {
+      if (rounds.length >= 10) {
+        rounds.shift(); // Remove a mais antiga
       }
+      rounds.push(color);
+      createRounds();
     }
 
+    // Limpa tudo
     function clearHistory() {
-      recentRounds = [];
-      createRoundGrid();
-      analyze();
+      rounds = [];
+      createRounds();
     }
 
+    // Analisa os dados
     function analyze() {
-      const blue = parseInt(document.getElementById('blue').value) || 0;
-      const red = parseInt(document.getElementById('red').value) || 0;
-      const yellow = parseInt(document.getElementById('yellow').value) || 0;
-      const total = blue + red + yellow;
+      const counts = { blue: 0, red: 0, yellow: 0 };
+      rounds.forEach(r => counts[r]++);
 
-      if (total === 0 && recentRounds.length === 0) {
-        document.getElementById('results').style.display = 'none';
-        return;
-      }
+      const total = rounds.length;
+      if (total === 0) return;
 
-      const pBlue = ((blue / total) * 100).toFixed(1);
-      const pRed = ((red / total) * 100).toFixed(1);
-      const pYellow = ((yellow / total) * 100).toFixed(1);
+      const pBlue = ((counts.blue / total) * 100).toFixed(1);
+      const pRed = ((counts.red / total) * 100).toFixed(1);
+      const pYellow = ((counts.yellow / total) * 100).toFixed(1);
 
+      // Atualiza barras
       document.getElementById('bar-blue').style.height = `${pBlue}%`;
       document.getElementById('bar-red').style.height = `${pRed}%`;
       document.getElementById('bar-yellow').style.height = `${pYellow}%`;
 
-      const probDiv = document.getElementById('probabilities');
-      probDiv.innerHTML = `
-        <div class="stats-row"><span>🔵 Azul</span><span class="blue-text">${blue} → ${pBlue}%</span></div>
-        <div class="stats-row"><span>🔴 Vermelho</span><span class="red-text">${red} → ${pRed}%</span></div>
-        <div class="stats-row"><span>🟡 Tie</span><span class="yellow-text">${yellow} → ${pYellow}%</span></div>
-        <div class="stats-row" style="font-weight:bold"><span>Total</span><span>${total}</span></div>
-      `;
-
+      // Previsão da IA
       let suggestion = "";
-      let confidence = "low";
 
-      // 🔴 Streak de 3+ (reversão provável)
-      if (recentRounds.length >= 3) {
-        const last3 = recentRounds.slice(-3);
+      // Streak de 3+ iguais
+      if (rounds.length >= 3) {
+        const last3 = rounds.slice(-3);
         if (last3[0] === last3[1] && last3[1] === last3[2]) {
           const last = last3[2];
-          suggestion = `🔥 Streak de 3x ${last === 'blue' ? '🔵 Azul' : '🔴 Vermelho'} detectado.<br>`;
-          suggestion += `➡️ Alta chance de <strong>reversão</strong>.<br>`;
-          suggestion += `✅ Entrada: Aposte no oposto.`;
-          confidence = "high";
+          suggestion = `🔥 Streak de 3x ${last === 'blue' ? '🔵 Azul' : '🔴 Vermelho'}!<br>`;
+          suggestion += `➡️ Alta chance de reversão.<br>`;
+          suggestion += `✅ Aposte no oposto.`;
         }
       }
 
-      // 🟡 Tie atrasado
-      else if (recentRounds.length >= 10 && !recentRounds.includes('yellow')) {
-        suggestion = `🟡 Tie ausente há ${recentRounds.length} rodadas!<br>`;
+      // Tie atrasado (10+ rodadas sem Tie)
+      else if (rounds.length >= 10 && !rounds.includes('yellow')) {
+        suggestion = `🟡 Tie ausente há 10 rodadas!<br>`;
         suggestion += `💡 Alta chance de sair agora (8x).<br>`;
-        suggestion += `✅ Entrada: Considere cobrir o Tie.`;
-        confidence = "medium";
+        suggestion += `✅ Considere cobrir o Tie.`;
       }
 
-      // 🔁 Zigzag claro
-      else if (recentRounds.length >= 4) {
-        const r = recentRounds;
-        const isZigzag = r.slice(0, -1).every((v, i) => v !== r[i + 1]);
+      // Zigzag (alternado)
+      else if (rounds.length >= 4) {
+        let isZigzag = true;
+        for (let i = 0; i < rounds.length - 1; i++) {
+          if (rounds[i] === rounds[i+1]) {
+            isZigzag = false;
+            break;
+          }
+        }
         if (isZigzag) {
-          const next = r[r.length - 1] === 'blue' ? '🔴 Vermelho' : '🔵 Azul';
-          suggestion = `🔄 Padrão alternado estável.<br>➡️ Próxima: ${next}<br>`;
-          suggestion += `✅ Entrada: Siga a sequência.`;
-          confidence = "medium";
+          const next = rounds[rounds.length - 1] === 'blue' ? '🔴 Vermelho' : '🔵 Azul';
+          suggestion = `🔄 Padrão alternado.<br>➡️ Próxima: ${next}<br>`;
+          suggestion += `✅ Siga a sequência.`;
         }
       }
 
-      // 🔵🔴 Cor dominante
-      else if (pBlue > 60) {
-        suggestion = `🔵 Azul está quente (${pBlue}%).<br>➡️ Pode continuar.<br>`;
-        suggestion += `✅ Entrada: Siga a onda.`;
-        confidence = "medium";
-      } else if (pRed > 60) {
-        suggestion = `🔴 Vermelho dominante (${pRed}%).<br>➡️ Tendência forte.<br>`;
-        suggestion += `✅ Entrada: Continue.`;
-        confidence = "medium";
-      } else {
-        suggestion = `⚖️ Sem padrão claro.<br>⏸️ Nenhuma entrada recomendada.`;
-        confidence = "low";
+      // Sem padrão claro
+      else {
+        suggestion = `⚖️ Sem tendência clara.<br>⏸️ Aguarde mais rodadas.`;
       }
 
-      const pred = document.getElementById('prediction');
-      pred.innerHTML = `<strong>Nível: ${confidence.toUpperCase()}</strong><br><br>${suggestion}`;
-      pred.className = `prediction ${confidence}`;
-
-      document.getElementById('results').style.display = 'block';
+      document.getElementById('prediction').innerHTML = suggestion;
     }
 
-    createRoundGrid();
+    // Iniciar
+    createRounds();
   </script>
 </body>
 </html>
